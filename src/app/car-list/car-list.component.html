@@ -1,0 +1,206 @@
+<div class="fixed-header container bg-light p-3 mb-4"></div>
+<h2>Kliendi andmed</h2>
+<p *ngIf="isLoggedIn">Tere, {{ customerName }}!</p>
+<p *ngIf="!isLoggedIn">Palun logige sisse.</p>
+
+<!-- Linn ja kuupäevade valikud -->
+<div class="row mb-3 justify-content-betwee">
+  <div class="col-md-3 custom-col">
+    <label for="city">City:</label>
+    <select id="city" [(ngModel)]="city" name="city" class="form-select" (ngModelChange)="onCityChange()">
+      <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
+    </select>
+  </div>
+
+  <div class="col-md-3 custom-col">
+    <label for="dateFrom">From:</label>
+    <input id="dateFrom" type="date" class="form-control" [(ngModel)]="dateFrom"
+      (ngModelChange)="onParametersChange()" />
+  </div>
+
+  <div class="col-md-3 custom-col">
+    <label for="dateTo">To:</label>
+    <input id="dateTo" type="date" class="form-control" [(ngModel)]="dateTo" (ngModelChange)="onParametersChange()" />
+  </div>
+
+  <div class="col-md-3 custom-col">
+    <label for="returnCity">Return City:</label>
+    <select id="returnCity" [(ngModel)]="returnCity" name="returnCity" class="form-select"
+      (ngModelChange)="onReturnCityChange()">
+      <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+<!-- </div> -->
+<!-- Keritav tabel autodega -->
+<div class="scrollable-content container">
+  <h3>Available Cars</h3>
+  <div class="table-wrapper">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Body Type</th>
+          <th>Color</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.brand.name }}</td>
+          <td>{{ car.model.name }}</td>
+          <td>{{ car.bodyType.name }}</td>
+          <td>{{ car.color.name }}</td>
+          <td>{{ car.amount }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="selectCar(car)">Select</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Kui auto on valitud, kuvatakse selle detailid ja tegevused -->
+  <div *ngIf="selectedCar" class="selected-car-details mt-4">
+    <div class="row">
+      <!-- Vasak veerg: Auto andmed -->
+      <div class="col-md-4">
+        <h4>Car Details</h4>
+        <p><strong>Brand:</strong> {{ selectedCar.brand.name }}</p>
+        <p><strong>Model:</strong> {{ selectedCar.model.name }}</p>
+        <p><strong>Body Type:</strong> {{ selectedCar.bodyType.name }}</p>
+        <p><strong>Color:</strong> {{ selectedCar.color.name }}</p>
+        <p><strong>Amount:</strong> {{ selectedCar.amount }}</p>
+      </div>
+
+      <!-- Keskne veerg: Auto pilt -->
+      <div class="col-md-4 text-center">
+        <h4>Car Image</h4>
+        <!-- <div *ngIf="selectedCarImageUrl">
+          <img [src]="selectedCarImageUrl" alt="Selected Car Image" class="img-fluid" style="max-width: 100%;">
+        </div>
+        <div *ngIf="!selectedCarImageUrl">
+          <p>Image not available</p>
+        </div> -->
+
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+          <img *ngIf="selectedCarImageUrl" [src]="selectedCarImageUrl" alt="Car Image" class="selected-car-image" />
+          <p *ngIf="!selectedCarImageUrl">Image not available</p>
+        </div>
+      </div>
+
+      <!-- Parem veerg: Tegevused -->
+      <div class="col-md-4">
+        <h4>Actions</h4>
+        <button class="btn btn-success btn-block mb-2" (click)="reserveCar()">Reserveeri auto</button>
+        <!-- Siia tulevad tulevased nupud -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<!-- <div *ngIf="showSignupModal" class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Signup</h2>
+    <form>
+      <label for="newUsername">Username:</label>
+      <input id="newUsername" type="text" [(ngModel)]="signupData.username" name="newUsername"/>
+      <label for="newPassword">Password:</label>
+      <input id="newPassword" type="password" [(ngModel)]="signupData.password" name="newPassword"/> -->
+<!-- <button type="button" class="btn btn-primary" (click)="signup()">Sign Up</button> -->
+<!--  <button type="button" class="btn btn-primary" (click)="openLoginModal()">Sign Up</button>
+      <button type="button" class="btn btn-secondary" (click)="closeSignupModal()">Close</button>
+    </form>
+  </div>
+</div> -->
+
+<!-- Car-list HTML -->
+<div class="container-fluid">
+  <!-- Car List sisu -->
+
+  <!-- Kliendi andmete modaalaken -->
+  <div *ngIf="showCustomerModal" id="customerModal" class="modal-backdrop">
+    <div class="modal-content">
+      <h2>Registreeri klient</h2>
+      <form>
+        <label for="firstName">Eesnimi:</label>
+        <input id="firstName" type="text" [(ngModel)]="customerData.firstName" name="firstName" class="form-control" />
+
+
+        <label for="lastName">Perekonnanimi:</label>
+        <input id="lastName" type="text" [(ngModel)]="customerData.lastName" name="lastName" class="form-control" />
+
+        <label for="address1">Aadress 1:</label>
+        <input id="address1" type="text" [(ngModel)]="customerData.address1" name="address1" class="form-control" />
+
+        <label for="address2">Aadress 2:</label>
+        <input id="address2" type="text" [(ngModel)]="customerData.address2" name="address2" class="form-control" />
+
+        <label for="addressCity">Linn:</label>
+        <select id="addressCity" [(ngModel)]="customerData.addressCity" name="addressCity" class="form-control">
+          <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
+        </select>
+
+        <label for="addressCountry">Riik:</label>
+        <input id="addressCountry" type="text" [(ngModel)]="customerData.addressCountry" name="addressCountry"
+          value="Eesti" class="form-control" />
+
+        <label for="email">E-post:</label>
+        <input id="email" type="email" [(ngModel)]="customerData.email" name="email" class="form-control" />
+
+        <div style="margin-top: 20px;">
+          <button type="button" class="btn btn-primary" (click)="submitCustomer()">Esita</button>
+          <button type="button" class="btn btn-secondary" (click)="closeCustomerModal()">Sulge</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- <div *ngIf="showCustomerModal" class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Registreeri klient</h2>
+    <form>
+      <label for="firstName">Eesnimi:</label>
+      <input id="firstName" type="text" [(ngModel)]="customerData.firstName" name="firstName" />
+
+      <label for="lastName">Perekonnanimi:</label>
+      <input id="lastName" type="text" [(ngModel)]="customerData.lastName" name="lastName" />
+
+      <label for="address1">Aadress 1:</label>
+      <input id="address1" type="text" [(ngModel)]="customerData.address1" name="address1" />
+
+      <label for="address2">Aadress 2:</label>
+      <input id="address2" type="text" [(ngModel)]="customerData.address2" name="address2" />
+
+      <label for="addressCity">Linn:</label>
+      <select id="addressCity" [(ngModel)]="customerData.addressCity" name="addressCity">
+        <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
+      </select>
+
+      <label for="addressCountry">Riik:</label>
+      <input id="addressCountry" type="text" [(ngModel)]="customerData.addressCountry" name="addressCountry" value="Eesti" />
+
+      <label for="email">E-post:</label>
+      <input id="email" type="email" [(ngModel)]="customerData.email" name="email" />
+
+      <button type="button" class="btn btn-primary" (click)="submitCustomer()">Esita</button>
+      <button type="button" class="btn btn-secondary" (click)="closeCustomerModal()">Sulge</button>
+    </form>
+  </div>
+</div> -->

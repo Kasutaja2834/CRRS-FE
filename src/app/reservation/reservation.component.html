@@ -1,0 +1,25 @@
+<p> Reservation  </p>
+<h2>Manage Reservations</h2>
+
+<ul>
+  <li *ngFor="let reservation of reservations">
+    {{ reservation.customerLastname }} - {{ reservation.carBrandName  }} ({{ reservation.carModelName  }}
+     (Customer ID: {{ reservation.customerId }})
+    <button (click)="selectReservation(reservation)">Select</button>
+  </li>
+</ul>
+
+<div *ngIf="selectedReservation">
+  <h3>Manage Reservation for {{ selectedReservation.car.model }}</h3>
+
+  <div>
+    <h4>Issue Car</h4>
+    <button (click)="issueCar()">Issue Car</button>
+  </div>
+
+  <div>
+    <h4>Return Car</h4>
+    <button (click)="returnCar()">Return Car</button>
+  </div>
+</div>
+

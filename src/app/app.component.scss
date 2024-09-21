@@ -1,0 +1,101 @@
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh; /* Täisekraani paigutus */
+}
+
+.header {
+  position: fixed; /* Fikseerime kogu päise koos navi ja teavitusribaga */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.main {
+  margin-top: 140px; /* Nihutame sisu alla, et see ei kattuks päise ja teavitusribaga */
+  overflow-y: auto; /* Keritav ala lapsekomponentide jaoks */
+  padding: 20px;
+}
+
+.navbar-nav .nav-link {
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+
+.navbar-nav .nav-link:hover {
+  text-decoration: underline;
+  color: #007bff; /* Hoveril muutub tekst siniseks */
+}
+
+.notification-bar {
+  background-color: #ffeb3b; /* Kollane taust */
+  color: #333;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  height: 40px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  font-size: 16px;
+  margin-left: 10px;
+  max-width: 150px; /* Määrab nupu maksimaalse laiuse */
+}
+
+.btn-danger {
+  width: auto; /* Tagab, et nupu laius on automaatne */
+  background-color: #dc3545;
+  color: #fff;
+}
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+}
+
+
+
+// /* Modaalaken login/signup jaoks */
+// .modal-backdrop {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// .modal-content {
+//   background-color: white;
+//   padding: 20px;
+//   border-radius: 8px;
+//   max-width: 500px;
+//   width: 100%;
+// }

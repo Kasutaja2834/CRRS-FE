@@ -1,0 +1,134 @@
+.fixed-header {
+  position: sticky; /* Hoidke päis fikseeritud */
+  top: 0;
+  z-index: 999; /* Kõrge väärtus, et jääks teiste elementide peale */
+  background-color: #f8f9fa;
+  margin-top: 20px; /* Lisame 20px ruumi sinise päise ja vaate vahele */
+}
+
+.scrollable-content {
+ // max-height: 400px; /* Piirame tabeli maksimaalse kõrguse */
+ max-height: none; /* Eemaldab kõrguse piirangu */
+  overflow-y: auto; /* Tabeli sisu on keritav */
+}
+
+.table-wrapper {
+  max-height: none; /* Eemaldab kõrguse piirangu tabelile */
+  //max-height: 100%; /* Piiratud kõrgus, et sisu mahuks */
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+/* Kolmeosalise sisu jaotus */
+.selected-car-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.selected-car-details,
+.selected-car-image,
+.selected-car-actions {
+  flex: 1;
+  padding: 10px;
+}
+
+.selected-car-details {
+  background-color: #f8f9fa; /* Taustavalik detailide jaoks */
+}
+
+.selected-car-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Taustavalik pildi jaoks */
+}
+
+.selected-car-image {
+  max-width: 300px; /* Määrab maksimaalse pildi laiuse */
+  height: auto; /* Säilitab õige proportsiooni */
+  margin-left: -40px; /* Nihutame vasakule */
+  display: block; /* Tagab, et pilt oleks eraldi plokis */
+}
+
+.selected-car-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.selected-car-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f8f9fa; /* Taustavalik nupu jaoks */
+}
+
+.selected-car-actions button {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+img {
+  max-width: 100%; /* Tagab, et pilt ei läheks üle määratud ala */
+  height: auto; /* Säilitab õige proportsiooni */
+  margin-left: -20px; /* Nihutab pilti vasakule (nt 20 pikslit) */
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Läbipaistev must taust
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; // Tagab, et modal on esiplaanil
+}
+
+.modal-content {
+  background-color: #fff; // Moodaali sisu on valge
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px; // Laius võid kohandada vastavalt vajadusele
+  max-width: 90%; // Et modal oleks väiksem väiksematel ekraanidel
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Varjuefekt modaalile
+}
+
+button {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%; // Kohandatud mobiili jaoks
+  }
+}
+///// uus 4 nupu stiil ----------------
+/// 
+/// 
+.row {
+  display: flex;
+  justify-content: space-between; /* Jagab elemendid võrdselt */
+  align-items: center;
+}
+
+.col-md-3 {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.col-md-3:last-child {
+  margin-right: 0;
+}
+
+/* Lisame natuke ruumi ülemiste ja alumiste elementide vahel */
+.mb-3 {
+  margin-bottom: 1.5rem;
+}

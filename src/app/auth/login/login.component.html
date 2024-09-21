@@ -1,0 +1,19 @@
+<h1>Login pane</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Kasutajanimi: </label>
+      <input id="username" formControlName="username" type="text" />
+    </div>
+    
+    <div>
+      <label for="password">Parool: </label>
+      <input id="password" formControlName="password" type="password" />
+    </div>
+  
+    <button type="submit" [disabled]="!loginForm.valid">Logi sisse</button>
+  </form>
+  
+  <div *ngIf="loginForm.invalid && loginForm.touched">
+    <p>Sisselogimisandmed on kohustuslikud!</p>
+  </div>
+  
